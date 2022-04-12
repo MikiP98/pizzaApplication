@@ -18,20 +18,20 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.projectlombok:lombok:1.18.20'
-    implementation 'org.projectlombok:lombok:1.18.20'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter:2.6.5'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.6.5'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.6.5'
+    implementation 'org.projectlombok:lombok:1.18.22'
+    //implementation 'org.projectlombok:lombok:1.18.22'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.5'
     //groupId 'org.springframework.boot'
     //artifactId 'spring-boot-starter-web'
     //groupId 'io.springfox'
     //artifactId 'springfox-boot-starter'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.6.5'
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     //implementation 'java:org.hibernate:hibernate-core'
-    implementation 'org.hibernate:hibernate-core:5.0.7.Final'
+    implementation 'org.hibernate:hibernate-core:5.6.7.Final'
     implementation 'org.springframework.boot:spring-boot-starter-parent:3.0.0-SNAPSHOT'
 }
 

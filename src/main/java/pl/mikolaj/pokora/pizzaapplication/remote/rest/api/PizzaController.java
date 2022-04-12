@@ -13,7 +13,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 public class PizzaController {
 
-    private final PizzaService pizzaService;
+    private PizzaService pizzaService = null;
 
     public PizzaController(PizzaService pizzaService) {
         this.pizzaService = pizzaService;
@@ -26,12 +26,13 @@ public class PizzaController {
         return ResponseEntity.ok(pizzaDto);
     }
 
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<PizzaDto> updatePizza(@RequestBody UpdatePizzaDto updatePizzaDto, @RequestHeader("Access-Token") String token, @PathVariable("id") Integer pizzaId) {
 
         PizzaDto pizzaDto = pizzaService.updatePizza(updatePizzaDto, token, pizzaId);
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(pizzaDto);
     }
+
     @DeleteMapping("/{id}")
     public void a() {
 

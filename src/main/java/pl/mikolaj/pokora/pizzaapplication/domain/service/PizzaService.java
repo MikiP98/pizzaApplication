@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.mikolaj.pokora.pizzaapplication.data.entity.pizza.PizzaEntity;
 import pl.mikolaj.pokora.pizzaapplication.data.entity.size.SizeEntity;
 import pl.mikolaj.pokora.pizzaapplication.data.repository.SizeRepository;
+import pl.mikolaj.pokora.pizzaapplication.domain.exception.ResourceNotFoundExeption;
 import pl.mikolaj.pokora.pizzaapplication.domain.mapper.PizzaMapper;
 import pl.mikolaj.pokora.pizzaapplication.domain.model.SizeType;
 import pl.mikolaj.pokora.pizzaapplication.remote.rest.dto.request.AddPizzaDto;
@@ -24,10 +25,10 @@ import static pl.mikolaj.pokora.pizzaapplication.domain.service.AuthorizationSer
 public class PizzaService {
 
 
-    private final PizzaRepository pizzaRepository;
-    private final SizeRepository sizeRepository;
-    private final PizzaMapper pizzaMapper;
-    private final SizeMapper sizeMapper;
+    private PizzaRepository pizzaRepository;
+    private SizeRepository sizeRepository;
+    private PizzaMapper pizzaMapper;
+    private SizeMapper sizeMapper;
 
     public PizzaService(PizzaRepository pizzaRepository, SizeRepository sizeRepository, PizzaMapper pizzaMapper, SizeMapper sizeMapper) {
         this.pizzaRepository = pizzaRepository;
@@ -35,6 +36,15 @@ public class PizzaService {
         this.pizzaMapper = pizzaMapper;
         this.sizeMapper = sizeMapper;
     }
+
+    public PizzaService(PizzaService pizzaService) {
+        this.pizzaRepository = pizzaService.pizzaRepository;
+        this.sizeRepository = pizzaService.sizeRepository;
+        this.pizzaMapper = pizzaService.pizzaMapper;
+        this.sizeMapper = pizzaService.sizeMapper;
+    }
+
+    public PizzaService(){}
 
     public PizzaDto addPizza(AddPizzaDto addPizzaDto, String token) {
 
@@ -81,6 +91,7 @@ public class PizzaService {
                 .map(sizeMapper::mapToSizeDto)
                 .collect(Collectors.toList());
 
+        /*
         List<SizeDto> sizeDtoList = SizeEntities.stream()
                 .map(sizeEntity -> {
                     SizeDto sizeDto = new SizeDto();
@@ -89,6 +100,7 @@ public class PizzaService {
                     sizeDto.setId(sizeEntity.getId());
                     return sizeDto;
                 }).collect(Collectors.toList());
+        */
 
         //PizzaEntity pizzaEntity = new PizzaEntity();
         //pizzaEntity.setName(addPizzaDto.getName());
@@ -97,6 +109,8 @@ public class PizzaService {
         return pizzaMapper.mapToPizzaDto(pizzaEntity, sizeDtoList);
     }
 
+
+
     public PizzaDto updatePizza(UpdatePizzaDto updatePizzaDto, String token, Integer pizzaId) {
         return null;
     }
@@ -104,11 +118,23 @@ public class PizzaService {
     PizzaDto pizzaDto = mapToPizzaDto(pizzaEntity, sizeDtoList);
     return pizzaMapper.mapToPizzaDto(pizzaEntity, sizeDtoList);
 
+
+
     public MenuDto getMenu() {
         List<PizzaEntity> pizzaEntities = pizzaRepository.findAll();
         List<PizzaDto> pizzaDtoList = pizzaEntities
                 .stream()
                 .map(pizzaEntity -> pizzaMapper.mapToPizzaDto(pizzaEntity))
                 .collect(Collectors.toList());
+        return new MenuDto(pizzaDtoList);
+    }
+
+    public void deletePizza(Integer pizzaId, String token) {
+        checkToken(token);
+        boolean pizzaExist = pizzaRepository.existsById(pizzaId);
+        if (!pizzaExist) {
+            throw new ResourceNotFoundExeption("Pizza o podanym id nie istnieje");
+        }
+        pizzaRepository.deleteById(pizzaId);
     }
 }
