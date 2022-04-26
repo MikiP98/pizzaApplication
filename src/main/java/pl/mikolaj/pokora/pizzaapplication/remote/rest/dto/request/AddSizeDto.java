@@ -19,4 +19,15 @@ public class AddSizeDto {
         this.name = name;
         this.addPizzaDtoList = addPizzaDtoList;
     }
+
+
+
+
+    public <E extends Enum<E>> Enum<E> getSize() {
+        return null;
+    }
+
+    public Object getPrice() {
+        return null;
+    }
 }

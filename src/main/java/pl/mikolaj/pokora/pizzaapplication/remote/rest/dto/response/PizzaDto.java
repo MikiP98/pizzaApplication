@@ -1,7 +1,12 @@
 package pl.mikolaj.pokora.pizzaapplication.remote.rest.dto.response;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
+@Getter
+@Setter
 public class PizzaDto {
 
     private Integer id;
@@ -18,27 +23,4 @@ public class PizzaDto {
         this.sizes = sizes;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<SizeDto> getSizes() {
-        return sizes;
-    }
-
-    public void setSizes(List<SizeDto> sizes) {
-        this.sizes = sizes;
-    }
 }

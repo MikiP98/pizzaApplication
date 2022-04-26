@@ -30,4 +30,11 @@ public class UpdatePizzaDto {
     public void setAddSizeDtoList(List<AddSizeDto> addSizeDtoList) {
         this.addSizeDtoList = addSizeDtoList;
     }
+
+
+
+
+    public List<AddSizeDto> getSizes() {
+        return getAddSizeDtoList();
+    }
 }

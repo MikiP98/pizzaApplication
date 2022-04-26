@@ -1,5 +1,10 @@
 package pl.mikolaj.pokora.pizzaapplication.remote.rest.dto.request;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class PizzaOrderDto {
 
     private Integer id;
@@ -15,28 +20,4 @@ public class PizzaOrderDto {
         this.count = count;
     }
 
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getSizeId() {
-        return sizeId;
-    }
-
-    public void setSizeId(Integer sizeId) {
-        this.sizeId = sizeId;
-    }
-
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
-    }
 }

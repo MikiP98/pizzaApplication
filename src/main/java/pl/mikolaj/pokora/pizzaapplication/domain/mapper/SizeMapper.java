@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SizeMapper {
+
     public SizeEntity mapToSizeEntity(AddSizeDto addSizeDto, Integer pizzaId) {
         SizeEntity sizeEntity = new SizeEntity();
         SizeEntity.setSizeType(addSizeDto.getSize().name());

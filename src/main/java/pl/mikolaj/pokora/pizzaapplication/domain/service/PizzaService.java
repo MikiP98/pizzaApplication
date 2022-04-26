@@ -112,11 +112,30 @@ public class PizzaService {
 
 
     public PizzaDto updatePizza(UpdatePizzaDto updatePizzaDto, String token, Integer pizzaId) {
+
+        checkToken(token);
+        boolean pizzaExist = pizzaRepository.existsById(pizzaId);
+        if (!pizzaExist) {
+            throw new ResourceNotFoundExeption("Pizza o podanym id nie istnieje");
+        }
+        PizzaEntity pizzaEntity = pizzaRepository.getById(pizzaId);
+        pizzaEntity.setName(updatePizzaDto.getName());
+        pizzaRepository.save(pizzaEntity);
+
+        sizeRepository.deleteAllByPizzaId(pizzaId);
+
+        List<AddSizeDto> addSizeDtoList = updatePizzaDto.getSizes();
+        List<SizeEntity> sizeEntities = addSizeDtoList
+                .stream()
+                .map(addSizeDto -> sizeMapper.mapToSizeEntity(addSizeDto, pizzaId))
+                .collect(Collectors.toList());
+        sizeRepository.saveAll(sizeEntities);
+
         return null;
     }
 
-    PizzaDto pizzaDto = mapToPizzaDto(pizzaEntity, sizeDtoList);
-    return pizzaMapper.mapToPizzaDto(pizzaEntity, sizeDtoList);
+    //PizzaDto pizzaDto = mapToPizzaDto(pizzaEntity, sizeDtoList);
+    //return pizzaMapper.mapToPizzaDto(pizzaEntity, sizeDtoList);
 
 
 

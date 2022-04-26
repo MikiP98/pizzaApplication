@@ -1,11 +1,15 @@
 package pl.mikolaj.pokora.pizzaapplication.data.entity.order;
 
+import lombok.Getter;
+import lombok.Setter;
 import pl.mikolaj.pokora.pizzaapplication.data.entity.ordersize.OrderSizeEntity;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Set;
 
+@Setter
+@Getter
 public class OrderEntity {
 
     @Id
@@ -46,4 +50,10 @@ public class OrderEntity {
     //1 zamówienie może mieć wiele sizów
     @OneToMany(mappedBy = "order")
     private Set<OrderSizeEntity> orderSizes;
+
+
+
+    public void setCreatedAt(Date date) {
+        this.createdAt = date;
+    }
 }

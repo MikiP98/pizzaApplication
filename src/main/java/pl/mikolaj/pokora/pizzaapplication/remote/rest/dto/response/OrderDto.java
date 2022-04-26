@@ -1,11 +1,15 @@
 package pl.mikolaj.pokora.pizzaapplication.remote.rest.dto.response;
 
+import lombok.Getter;
+import lombok.Setter;
 import pl.mikolaj.pokora.pizzaapplication.domain.model.OrderStatusType;
 import pl.mikolaj.pokora.pizzaapplication.remote.rest.dto.request.PersonOrderDto;
 import pl.mikolaj.pokora.pizzaapplication.remote.rest.dto.request.PizzaOrderDto;
 
 import java.util.List;
 
+@Getter
+@Setter
 public class OrderDto {
 
     private Integer id;
@@ -23,36 +27,4 @@ public class OrderDto {
         this.person = person;
     }
 
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public OrderStatusType getStatus() {
-        return status;
-    }
-
-    public void setStatus(OrderStatusType status) {
-        this.status = status;
-    }
-
-    public List<PizzaOrderDto> getPizzas() {
-        return pizzas;
-    }
-
-    public void setPizzas(List<PizzaOrderDto> pizzas) {
-        this.pizzas = pizzas;
-    }
-
-    public PersonOrderDto getPerson() {
-        return person;
-    }
-
-    public void setPerson(PersonOrderDto person) {
-        this.person = person;
-    }
 }

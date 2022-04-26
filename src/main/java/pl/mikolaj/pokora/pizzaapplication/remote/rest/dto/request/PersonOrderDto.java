@@ -1,5 +1,10 @@
 package pl.mikolaj.pokora.pizzaapplication.remote.rest.dto.request;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class PersonOrderDto {
     private String name;
     private String phone;
@@ -16,7 +21,6 @@ public class PersonOrderDto {
         this.floor = floor;
     }
 
-
     public String getName() {
         return name;
     }
@@ -29,23 +33,11 @@ public class PersonOrderDto {
         return phone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public Integer getFloor() {
         return floor;
-    }
-
-    public void setFloor(Integer floor) {
-        this.floor = floor;
     }
 }
